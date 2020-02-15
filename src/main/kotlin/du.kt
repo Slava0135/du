@@ -22,7 +22,7 @@ fun analyze(data: List<String>) {
     val fileList = data.filter { it.startsWith("\"") }.map { name -> name.filter { it != '"' } }
 
     val fileInfo = if ("-c" in args)
-        getEveryFileSize(deleteDoubles(fileList))
+        getEveryFileSize(deleteDuplicates(fileList))
     else getEveryFileSize(fileList)
 
     val result = mutableListOf<Long?>()
@@ -76,7 +76,7 @@ fun analyze(data: List<String>) {
     }
 }
 
-fun deleteDoubles(fileList: List<String>) = fileList.filter { file -> fileList.all{ file.startsWith(it) } }
+fun deleteDuplicates(fileList: List<String>) = fileList.filter { file -> fileList.all{ file.startsWith(it) } }
 
 fun getEveryFileSize(fileList: List<String>): List<Long?> {
     val result = mutableListOf<Long?>()
