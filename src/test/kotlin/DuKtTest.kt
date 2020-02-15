@@ -3,6 +3,8 @@ package du
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import java.io.File
+import java.nio.file.Paths
 
 class DuKtTest {
 
@@ -31,6 +33,12 @@ class DuKtTest {
 
     @Test
     fun getEveryFileSize() {
+        val root = Paths.get("").toAbsolutePath().toString()
+        val testRoot = "$root\\src\\test\\resources\\sizeTest"
+        assertEquals(2, getEveryFileSize(listOf("$testRoot\\sample1")).first())
+        assertNull(getEveryFileSize(listOf(testRoot + "lol")).first())
+        assertEquals(listOf(2L, 21L), getEveryFileSize(listOf("$testRoot\\sample1", "$testRoot\\sample2")))
+        assertEquals(listOf(23L), getEveryFileSize(listOf(testRoot)))
     }
 
     @Test
@@ -40,5 +48,6 @@ class DuKtTest {
         assertEquals(Pair(2.0, 2), round(1000, 2_000_000))
         assertEquals(Pair(2.0, 3), round(1000, 2_000_000_000))
         assertEquals(Pair(2000.0, 3), round(1000, 2_000_000_000_000))
+        assertEquals(Pair(1024.0, 3), round(1024, 1024L * 1024 * 1024 * 1024))
     }
 }
