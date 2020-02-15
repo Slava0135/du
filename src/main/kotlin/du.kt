@@ -1,3 +1,5 @@
+package du
+
 import java.io.File
 
 val units = listOf("B", "KB", "MB", "GB")
