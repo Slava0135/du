@@ -78,7 +78,16 @@ fun analyze(data: List<String>) {
     }
 }
 
-fun deleteDuplicates(fileList: List<String>) = fileList.filter { file -> fileList.all{ file.startsWith(it) } }
+fun deleteDuplicates(fileList: List<String>): List<String> {
+    val result = mutableListOf<String>()
+    for (file in fileList) {
+        result.removeAll { directory -> directory.startsWith(file) }
+        if (result.all { directory -> !file.startsWith(directory) } ) {
+            result.add(file)
+        }
+    }
+    return result
+}
 
 fun getEveryFileSize(fileList: List<String>): List<Long?> {
     val result = mutableListOf<Long?>()
@@ -97,12 +106,12 @@ fun getEveryFileSize(fileList: List<String>): List<Long?> {
     return result
 }
 
-fun round(base: Int, num: Long): Pair<Float, Int> {
-    var number = num.toFloat()
+fun round(base: Int, num: Long): Pair<Double, Int> {
+    var number = num.toDouble()
     var count = 0
     while (count < units.size - 1 && number > base) {
         number /= base
         count++
     }
-    return Pair(number, count)
+    return Pair(number, count) //count is equals unit from units
 }
