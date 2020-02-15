@@ -21,7 +21,7 @@ fun match(inputLine: String) = inputLine.matches(Regex("""(-h )?(-c )?(--si )?("
 
 fun analyze(data: List<String>) {
     val args = data.filter { it.startsWith("-") }
-    val fileList = data.filter { it.startsWith("\"") }.map { name -> name.filter { it != '"' } }
+    val fileList = data.filter { it.startsWith("\"") }.map { name -> name.filter { it != '"' } }.toSet().toList()
 
     val fileInfo = if ("-c" in args)
         getEveryFileSize(deleteDuplicates(fileList))
