@@ -25,7 +25,7 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
     }
     private val files = getFileInfo()
 
-    fun getInfo() {
+    fun printInfo() {
         if (total) {
             if (files.all { it.size != null }) {
                 var sum = 0L
@@ -43,8 +43,8 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
                     if (file.size == null) {
                         println("File ${file.name} doesn't exist!")
                     }
-                    exitProcess(1)
                 }
+                exitProcess(1)
             }
         }
         else {
