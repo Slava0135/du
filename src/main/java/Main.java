@@ -6,13 +6,13 @@ import java.io.IOException;
 
 public class Main {
     @Option(name = "-h", usage = "Human friendly output.")
-    private boolean human;
+    boolean human;
     @Option(name = "-c", usage = "Total size of the files.")
-    private boolean count;
+    boolean count;
     @Option(name = "--si", usage = "Use SI.")
-    private boolean base;
+    boolean base;
     @Option(name="-f", usage="Fully qualified path and name of files.", required=true)
-    private String[] fileName;
+    String[] fileName;
 
     private void doMain(final String[] arguments) throws IOException {
         final CmdLineParser parser = new CmdLineParser(this);
