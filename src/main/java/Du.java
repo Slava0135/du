@@ -6,7 +6,7 @@ import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 
 import java.io.IOException;
 
-public class Main {
+public class Du {
     @Option(name = "-h", usage = "Human friendly output.")
     boolean human;
     @Option(name = "-c", usage = "Total size of the files.")
@@ -30,7 +30,7 @@ public class Main {
         }
     }
     public static void main(final String[] arguments) {
-        final Main instance = new Main();
+        final Du instance = new Du();
         try {
             instance.doMain(arguments);
             SizeManager operator = new SizeManager(instance.base ? 1000 : 1024, instance.human, instance.count, instance.fileName);

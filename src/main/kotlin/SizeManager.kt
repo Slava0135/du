@@ -42,7 +42,6 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
                         println("File ${file.name} doesn't exist!")
                     }
                 }
-                exitProcess(1)
             }
         }
         else {
