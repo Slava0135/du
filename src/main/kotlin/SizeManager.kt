@@ -1,5 +1,4 @@
 import java.io.File
-import kotlin.system.exitProcess
 
 class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
 
