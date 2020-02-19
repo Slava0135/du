@@ -31,6 +31,8 @@ public class Main {
         final Main instance = new Main();
         try {
             instance.doMain(arguments);
+            SizeManager operator = new SizeManager(instance.base ? 1000 : 1024, instance.human, instance.count, instance.fileName);
+            operator.printInfo();
         }
         catch (IOException ioEx) {
             System.out.println("ERROR: I/O Exception encountered: " + ioEx);
