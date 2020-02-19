@@ -1,3 +1,4 @@
+import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -12,7 +13,7 @@ public class Main {
     boolean count;
     @Option(name = "--si", usage = "Use SI.")
     boolean base;
-    @Option(name = "-f", usage="Fully qualified path and name of files.", handler = StringArrayOptionHandler.class, required = true)
+    @Argument(usage="Fully qualified path and name of files.", handler = StringArrayOptionHandler.class, required = true)
     String[] fileName;
 
     private void doMain(final String[] arguments) throws IOException {
