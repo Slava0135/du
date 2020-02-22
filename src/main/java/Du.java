@@ -4,8 +4,6 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 
-import java.io.IOException;
-
 public class Du {
     @Option(name = "-h", usage = "Human friendly output.")
     boolean human;
@@ -16,7 +14,7 @@ public class Du {
     @Argument(usage="Fully qualified path and name of files.", handler = StringArrayOptionHandler.class, required = true)
     String[] fileName;
 
-    private void doMain(final String[] arguments) throws IOException {
+    private void doMain(final String[] arguments) {
         final CmdLineParser parser = new CmdLineParser(this);
         if (arguments.length < 1) {
             parser.printUsage(System.out);
@@ -31,13 +29,8 @@ public class Du {
     }
     public static void main(final String[] arguments) {
         final Du instance = new Du();
-        try {
-            instance.doMain(arguments);
-            SizeManager operator = new SizeManager(instance.base ? 1000 : 1024, instance.human, instance.count, instance.fileName);
-            operator.printInfo();
-        }
-        catch (IOException ioEx) {
-            System.out.println("ERROR: I/O Exception encountered: " + ioEx);
-        }
+        instance.doMain(arguments);
+        SizeManager operator = new SizeManager(instance.base ? 1000 : 1024, instance.human, instance.count, instance.fileName);
+        operator.printInfo();
     }
 }

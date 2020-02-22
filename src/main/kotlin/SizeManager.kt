@@ -4,6 +4,8 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
 
     private val units = listOf("B", "KB", "MB", "GB")
 
+    data class FileInfo(val name: String, val size: Long?)
+
     private fun getFileInfo(): List<FileInfo> {
         val result = mutableListOf<FileInfo>()
         for (name in paths) {
@@ -27,7 +29,7 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
             if (files.all { it.size != null }) {
                 var sum = 0L
                 for (file in files) {
-                    sum += file.size!!
+                    sum += file.size ?: 0
                 }
                 if (humanLike) {
                     val (value, unit) = round(sum)
@@ -38,7 +40,7 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
             } else {
                 for (file in files) {
                     if (file.size == null) {
-                        println("File ${file.name} doesn't exist!")
+                        println("ERROR: File ${file.name} doesn't exist!")
                     }
                 }
             }
@@ -46,7 +48,7 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
         else {
             for (file in files) {
                 if (file.size == null) {
-                    println("${file.name} doesn't exist!")
+                    println("ERROR: File ${file.name} doesn't exist!")
                 } else {
                     if (humanLike) {
                         val (value, unit) = round(file.size)
@@ -69,5 +71,3 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
         return value to unit
     }
 }
-
-class FileInfo(val name: String, val size: Long?)
