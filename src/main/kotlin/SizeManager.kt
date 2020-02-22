@@ -3,6 +3,7 @@ import java.io.File
 class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
 
     private val units = listOf("B", "KB", "MB", "GB")
+    private val files = getFileInfo()
 
     data class FileInfo(val name: String, val size: Long?)
 
@@ -22,7 +23,6 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
         }
         return result
     }
-    private val files = getFileInfo()
 
     fun printInfo() {
         if (total) {
