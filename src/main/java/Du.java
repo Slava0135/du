@@ -16,7 +16,7 @@ public class Du {
     @Argument(usage="Fully qualified path and name of files.", handler = StringArrayOptionHandler.class)
     String[] fileNames;
 
-    private void doMain(final String[] arguments) throws IOException {
+    void doMain(final String[] arguments) throws IOException {
         final CmdLineParser parser = new CmdLineParser(this);
         if (arguments.length != 0) {
             try {

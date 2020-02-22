@@ -1,6 +1,6 @@
 import java.io.File
 
-open class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
+class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
 
     private val units = listOf("B", "KB", "MB", "GB")
     private val files = getFileInfo()
