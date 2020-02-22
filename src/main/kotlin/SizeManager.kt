@@ -13,9 +13,11 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
             val file = File(name)
             if (file.exists()) {
                 if (file.isDirectory) {
-                    var sum = file.length()
+                    var sum = 0L
                     for (subFile in file.walk()) {
-                        sum += subFile.length()
+                        if (!subFile.isDirectory) {
+                            sum += subFile.length()
+                        }
                     }
                     result.add(FileInfo(name, sum))
                 } else result.add(FileInfo(name, file.length()))
