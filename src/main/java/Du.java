@@ -14,7 +14,7 @@ public class Du {
     @Option(name = "--si", usage = "Use SI.")
     boolean base;
     @Argument(usage="Fully qualified path and name of files.", handler = StringArrayOptionHandler.class)
-    String[] fileName;
+    String[] fileNames;
 
     private void doMain(final String[] arguments) throws IOException {
         final CmdLineParser parser = new CmdLineParser(this);
@@ -33,7 +33,7 @@ public class Du {
         final Du du = new Du();
         try {
             du.doMain(arguments);
-            SizeManager operator = new SizeManager(du.base ? 1000 : 1024, du.human, du.count, du.fileName);
+            SizeManager operator = new SizeManager(du.base ? 1000 : 1024, du.human, du.count, du.fileNames);
             operator.printInfo();
         } catch (IOException ioEx){
             System.out.println("ERROR: I/O Exception encountered: " + ioEx);

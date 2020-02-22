@@ -1,6 +1,6 @@
 import java.io.File
 
-class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
+open class SizeManager(private val base: Int, private val humanLike: Boolean, private val total: Boolean, private val paths: Array<String>) {
 
     private val units = listOf("B", "KB", "MB", "GB")
     private val files = getFileInfo()
@@ -13,13 +13,8 @@ class SizeManager(private val base: Int, private val humanLike: Boolean, private
             val file = File(name)
             if (file.exists()) {
                 if (file.isDirectory) {
-                    var sum = 0L
-                    for (subFile in file.walk()) {
-                        if (!subFile.isDirectory) {
-                            sum += subFile.length()
-                        }
-                    }
-                    result.add(FileInfo(name, sum))
+                    result.add(FileInfo(name, file.walk()
+                        .fold(0L) { prevResult, it -> prevResult + if (!it.isDirectory) it.length() else 0 }))
                 } else result.add(FileInfo(name, file.length()))
             } else result.add(FileInfo(name, null))
         }
