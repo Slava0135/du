@@ -26,15 +26,14 @@ public class Du {
             }
         } else {
             parser.printUsage(System.out);
-            System.exit(1);
+            System.exit(0);
         }
     }
     public static void main(final String[] arguments) {
         final Du du = new Du();
         try {
             du.doMain(arguments);
-            SizeManager operator = new SizeManager(du.base ? 1000 : 1024, du.human, du.count, du.fileNames);
-            operator.printInfo();
+            FileInfoKt.printInfo(du.base ? 1000 : 1024, du.human, du.count, du.fileNames);
         } catch (IOException ioEx){
             System.out.println("ERROR: I/O Exception encountered: " + ioEx);
         }
